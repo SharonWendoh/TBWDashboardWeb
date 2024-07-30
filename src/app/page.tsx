@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 const darkTheme = createTheme({
   palette: {
@@ -23,20 +24,24 @@ const darkTheme = createTheme({
 })
 
 export default function Home() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-    const handleLoginClick = () => {
-      router.push('/pages/Dashboard');
-      // const credentials = { email, password };
-      // try {
-      //   await authenticate(credentials);
-      //   router.push('/pages/Dashboard');
-      // } catch (error){
-      //    console.error('Authentication failed', error);
-      //   }
-      };
+    const handleLoginClick = async () => {
+
+      const result = await signIn('credentials', {
+        redirect: false,
+        username,
+        password,
+      });
+
+      if (result?.ok) {
+        router.push('/pages/Dashboard');
+      } else {
+        console.error('Authentication Failed')
+      }
+    };
   return (
     <ThemeProvider theme={darkTheme}>
       <main>
@@ -74,8 +79,18 @@ export default function Home() {
                   borderRadius: '8px',
                   
               }}>
-                  <OutlinedTextField placeholder="Username" icon={<AccountCircle />}/>
-                  <OutlinedTextField placeholder="Password" icon={<LockRoundedIcon />}/>
+                  <OutlinedTextField 
+                  placeholder="Username" 
+                  icon={<AccountCircle />}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}/>
+
+                  <OutlinedTextField 
+                  placeholder="Password" 
+                  icon={<LockRoundedIcon />}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}/>
+
                   <FilledButton onClick={handleLoginClick}>
                       Login
                   </FilledButton>
