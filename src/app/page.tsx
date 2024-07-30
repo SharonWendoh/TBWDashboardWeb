@@ -6,6 +6,7 @@ import OutlinedTextField from "@/app/components/textfields/outlined-text-field";
 import { useRouter } from "next/navigation";
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useState } from "react";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,10 +23,19 @@ const darkTheme = createTheme({
 })
 
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
 
     const handleLoginClick = () => {
-        router.push('/pages/Dashboard'); // Replace '/details' with the actual path to your details page
+      router.push('/pages/Dashboard');
+      // const credentials = { email, password };
+      // try {
+      //   await authenticate(credentials);
+      //   router.push('/pages/Dashboard');
+      // } catch (error){
+      //    console.error('Authentication failed', error);
+      //   }
       };
   return (
     <ThemeProvider theme={darkTheme}>

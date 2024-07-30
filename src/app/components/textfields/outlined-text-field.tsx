@@ -6,12 +6,16 @@ import { InputAdornment } from '@mui/material';
 interface TextFieldProps {
   placeholder: string;
   icon: React.ReactNode;
+  // value: string;
+  // onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: () => void;
 }
 
 export default function OutlinedTextField({
   placeholder,
   icon,
+  // value,
+  // onChange,
   onClick
 }: TextFieldProps) {
   return (
@@ -26,6 +30,8 @@ export default function OutlinedTextField({
       <TextField 
       id="outlined-basic"  
       placeholder={placeholder}
+      // value={value}
+      // onChange={onChange}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
