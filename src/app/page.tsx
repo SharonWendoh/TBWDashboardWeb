@@ -11,7 +11,7 @@ import { signIn } from "next-auth/react";
 
 const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     primary: {
       main: '#FFA833'
     },
