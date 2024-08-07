@@ -10,14 +10,10 @@ import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { getServerSession } from "next-auth";
 
-export default async function Page(){
+export default function Page(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
-    // const session = await getServerSession();
-    // if(session){
-    //     redirect('/pages/Dasboard')
-    // }
 
     const handleLoginClick = async () => {
 
