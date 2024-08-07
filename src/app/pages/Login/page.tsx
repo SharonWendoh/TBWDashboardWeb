@@ -5,10 +5,9 @@ import { AccountCircle } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
-import { getServerSession } from "next-auth";
+import PasswordTextField from "@/app/components/textfields/password-text-field";
 
 export default function Page(){
     const [username, setUsername] = useState('');
@@ -72,9 +71,8 @@ export default function Page(){
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}/>
 
-                  <OutlinedTextField 
-                  placeholder="Password" 
-                  icon={<LockRoundedIcon />}
+                  <PasswordTextField 
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}/>
 
