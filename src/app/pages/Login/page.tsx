@@ -6,13 +6,18 @@ import { Box } from "@mui/material";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
+import { getServerSession } from "next-auth";
 
-export default function Page(){
+export default async function Page(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
+    // const session = await getServerSession();
+    // if(session){
+    //     redirect('/pages/Dasboard')
+    // }
 
     const handleLoginClick = async () => {
 

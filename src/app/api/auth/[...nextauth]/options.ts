@@ -10,31 +10,6 @@ export const options: NextAuthOptions = {
         strategy: "jwt"
     },
     providers: [
-        // CredentialsProvider({
-        //     name: "Credentials",
-        //     credentials:{
-        //         username: {
-        //             label: "Username",
-        //             type: "text",
-        //             placeholder: "John Doe"
-        //         },
-        //         password: {
-        //             label: "Password",
-        //             type: "password",
-        //             placeholder: "*******"
-        //         }
-        //     },
-        //     async authorize(credentials){
-        //         //This is where you can retrieve users from the database
-        //         const user = { id: "42", name: "Sharon", password: "12345"}
-
-        //         if (credentials?.username === user.name && credentials?.password === user.password){
-        //             return user
-        //         } else {
-        //             return null
-        //         }
-        //     }
-        // }),
         CredentialsProvider({
             name: 'Credentials',
             credentials: {
