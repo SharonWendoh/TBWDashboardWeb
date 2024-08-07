@@ -27,7 +27,7 @@ export default function OutlinedTextField({
       noValidate
       autoComplete="off"
     >
-      <TextField 
+      <TextField sx={{color:'white'}}
       id="outlined-basic"  
       placeholder={placeholder}
       value={value}
