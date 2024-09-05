@@ -1,13 +1,21 @@
+import MenuDrawer from "@/app/components/app-bars/menu-bar";
+import TopAppBar from "@/app/components/app-bars/top-app-bar";
 import LogOutIcon from "@/app/components/icons/logout-icon";
 import PasswordTextField from "@/app/components/textfields/password-text-field";
+import { Box } from "@mui/material";
 
 export default function Page(){
     return(
         <main>
-            <h1>
-                <LogOutIcon />
-                Dashboard
-            </h1>
+            <Box
+                marginLeft={0} 
+                justifyContent="flex-start" 
+            >
+                <h1>
+                    <LogOutIcon />
+                    Dashboard
+                </h1>
+            </Box>
         </main>
     )
 }
