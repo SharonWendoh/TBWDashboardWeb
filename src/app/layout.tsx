@@ -37,11 +37,6 @@ export default function RootLayout({
     <ThemeProvider theme={darkTheme}>
      <html lang="en">
         <body className={inter.className}>
-          {/* {!!session && 
-          <LogOutIcon />
-          }
-          {!session && 
-          redirect('/pages/Login')} */}
           {children}</body>
       </html>
     </ThemeProvider>
