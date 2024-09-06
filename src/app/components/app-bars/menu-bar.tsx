@@ -29,7 +29,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: 'hidden',
-  //top: '64px', // Adjust this based on your AppBar height
+  top: '64px', // Adjust this based on your AppBar height
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -39,7 +39,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
   }),
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
-  //top: '64px', // Adjust this based on your AppBar height
+  top: '64px', // Adjust this based on your AppBar height
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },

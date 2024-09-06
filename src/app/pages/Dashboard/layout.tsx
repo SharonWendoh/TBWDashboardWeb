@@ -13,7 +13,7 @@ export default function Layout({ children }: {children: React.ReactNode}){
             sx={{ 
                 flexGrow: 1, 
                 p: 3 , 
-                //mt: '64px',
+                mt: '32px',
             }}>
              {children}   
             </Box>
