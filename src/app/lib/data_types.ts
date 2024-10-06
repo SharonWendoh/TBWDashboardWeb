@@ -1,3 +1,10 @@
+interface PaginatedCakesResponse {
+    data: CakeFlavour[];
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+}
+
 interface CakeFlavour {
     id: number;
     flavor: string;
@@ -10,4 +17,5 @@ interface CakeFlavour {
     price_4kg: string | null;
     price_4_5kg: string | null;
     price_per_kg: string | null;
-  }
+}
+

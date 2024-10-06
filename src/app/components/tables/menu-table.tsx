@@ -10,20 +10,20 @@ import { TablePagination } from '@mui/material';
 import Paper from '@mui/material/Paper';
 
 interface CommissionDetailsTableProps {
-  data: CakeFlavour[];
-//   page: number;
-//   rowsPerPage: number;
-//   totalCount: number;
-//   onPageChange: (event: unknown, newPage: number) => void;
-//   onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  data: CakeFlavour[] | [];
+  page: number;
+  limit: number;
+  totalCount: number;
+  onPageChange: (event: unknown, newPage: number) => void;
+  onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export default function MenuTable({
   data,
-//   page,
-//   rowsPerPage,
-//   totalCount,
-//   onPageChange,
-//   onRowsPerPageChange
+  page,
+  limit,
+  totalCount,
+  onPageChange,
+  onRowsPerPageChange
 }: CommissionDetailsTableProps){
   
   return (
@@ -66,15 +66,15 @@ export default function MenuTable({
           ))}
         </TableBody>
       </Table>
-      {/* <TablePagination
+      <TablePagination
         rowsPerPageOptions={[10, 25, 50]}
         component="div"
-        // count={totalCount} 
-        // rowsPerPage={rowsPerPage}
-        // page={page}
-        // onPageChange={onPageChange}
-        // onRowsPerPageChange={onRowsPerPageChange}
-      /> */}
+        count={totalCount} 
+        rowsPerPage={limit}
+        page={page}
+        onPageChange={onPageChange}
+        onRowsPerPageChange={onRowsPerPageChange}
+      />
     </TableContainer>
   );
 }
