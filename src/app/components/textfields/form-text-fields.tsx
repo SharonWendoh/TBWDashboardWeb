@@ -13,6 +13,7 @@ interface TextFieldProps {
 }
 interface DisabledTextFieldProps {
   value: string;
+  label: string;
 }
 export function FormTextField({
   label,
@@ -33,13 +34,14 @@ export function FormTextField({
 }
 
 export function DisabledFormTextField({
-  value
+  value,
+  label,
 }: DisabledTextFieldProps){
   return(
     <TextField
       disabled
       id="outlined-disabled"
-      label="Disabled"
+      label={label}
       defaultValue={value}
     />
   )

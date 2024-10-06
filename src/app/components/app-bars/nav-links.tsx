@@ -16,7 +16,7 @@ const links = [
     { name: 'Dashboard', href: '/pages/Dashboard', icon: WindowIcon},
     { name: 'Orders', href: '/pages/Dashboard/Orders', icon: ShoppingBagOutlinedIcon},
     { name: 'Transactions', href: '/pages/Dashboard/Lines', icon: TimelineOutlinedIcon},
-    { name: 'Menu', href: '/pages/Dashboard/Settings', icon: RestaurantMenuOutlinedIcon},
+    { name: 'Menu', href: '/pages/Dashboard/Menu', icon: RestaurantMenuOutlinedIcon},
     { name: 'Customers', href: '/pages/Dashboard/Settings', icon: PeopleAltOutlinedIcon},
     { name: 'Accounts', href: '/pages/Dashboard/Settings', icon: SettingsIcon},
     { name: 'Calendar', href: '/pages/Dashboard/Settings', icon: SettingsIcon},
