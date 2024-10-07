@@ -26,3 +26,27 @@ export function FilledButton({
         </Button>
     )
 }
+
+export function SubmitButton({
+    children,
+    onClick
+}: ButtonProps)
+{
+    return (
+        <Button
+        variant="contained" 
+        size="large"
+        color="primary"
+        sx={{
+            width: 225,
+            height: 51,
+            fontSize: 18,
+            textTransform: 'none',
+            borderRadius: 3
+        }}
+        onClick={onClick}
+        >
+            {children}
+        </Button>
+    )
+}
