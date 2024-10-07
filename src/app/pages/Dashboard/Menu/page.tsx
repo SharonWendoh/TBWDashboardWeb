@@ -41,7 +41,7 @@ export default function Page(){
     setPage(0);
     };
 
-    console.log(cakes?.totalItems)
+    //console.log(cakes?.totalItems)
     return (
         <div>
             <NewOrderIcon />

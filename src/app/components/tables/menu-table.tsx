@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import { TablePagination } from '@mui/material';
 import Paper from '@mui/material/Paper';
 
-interface CommissionDetailsTableProps {
+interface MenuTableProps {
   data: CakeFlavour[] | [];
   page: number;
   limit: number;
@@ -24,7 +24,7 @@ export default function MenuTable({
   totalCount,
   onPageChange,
   onRowsPerPageChange
-}: CommissionDetailsTableProps){
+}: MenuTableProps){
   
   return (
     <TableContainer component={Paper}>

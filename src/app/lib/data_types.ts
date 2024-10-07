@@ -19,3 +19,28 @@ interface CakeFlavour {
     price_per_kg: string | null;
 }
 
+interface PaginatedOrdersResponse {
+    data: Orders[];
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+}
+
+interface Orders {
+    order_id: number;
+    name: string;
+    flavour: string;
+    size: number;
+    date: string;
+    status: 'Booked' | 'Confirmed' | 'In progress' | 'Completed';
+    time: string;
+    total: number;
+    contact: string;
+    attendant: string;
+    deposit: number;
+    balance: number;
+    delivery_location: string;
+    additional_description?: string;
+    image?: string | null; 
+}
+
