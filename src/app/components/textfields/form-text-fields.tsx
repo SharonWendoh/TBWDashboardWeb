@@ -28,10 +28,9 @@ interface DisabledTextFieldProps {
 
 interface SelectTextFieldProps {
   label: string;
-  //name: string;
-  //helperText: string;
-  //value: string;
-  //data: ["Vanilla", "Chocolate"];
+  name: string;
+  value: string;
+  data: CakeFlavour[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const data = ["Vanilla", "Chocolate"];
@@ -138,24 +137,25 @@ export function TimePickerField(){
 }
 
 export function SelectTextField({
-  label, 
-  //helperText,
-  //data,
+  label,
+  name,
+  value,
+  data,
   onChange,
 }: SelectTextFieldProps){
   return(
     <TextField
-          id="outlined-select-currency"
+          id="outlined-select-cake-flavour"
           select
           label={label}
+          name={name}
           fullWidth
-          defaultValue="EUR"
-          //helperText={helperText}
+          value={value}
           onChange={onChange}
         >
           {data.map((option) => (
-            <MenuItem key={option} value={option}>
-              {option}
+            <MenuItem key={option.id} value={option.flavor}>
+              {option.flavor}
             </MenuItem>
           ))}
         </TextField>

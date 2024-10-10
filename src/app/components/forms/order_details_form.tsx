@@ -1,7 +1,13 @@
 import { Box, Grid } from "@mui/material";
 import { FormTextField, MultilineTextField, NumberTextField, SelectTextField } from "../textfields/form-text-fields";
 
-export default function OrderDetailsForm({ formData, handleChange }: any){
+interface OrderDetailsFormProps {
+    formData: any;
+    handleChange: any;
+    cakeFlavours: CakeFlavour[] | null; // Accept cakeFlavours as prop
+}
+
+export default function OrderDetailsForm({ formData, handleChange, cakeFlavours }: OrderDetailsFormProps){
     return(
         <Box>
                 <Box sx={{ flexGrow: 1, mt: '32px'}}>
@@ -9,9 +15,10 @@ export default function OrderDetailsForm({ formData, handleChange }: any){
                         <Grid item xs={12} md={6}>
                             <SelectTextField 
                                 label="Flavour"
-                                //helperText="Select Cake Flavour"
-                                //value={formData.name}
+                                name="flavour"
+                                value={formData.flavour}
                                 onChange={handleChange}
+                                data={cakeFlavours || []}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>

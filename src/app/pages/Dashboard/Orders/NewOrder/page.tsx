@@ -4,9 +4,13 @@ import OrderDetailsForm from "@/app/components/forms/order_details_form";
 import CustomizedSteppers from "@/app/components/steppers/orders_stepper";
 import { DatePickerField, FormTextField, MultilineTextField, SelectTextField, TimePickerField } from "@/app/components/textfields/form-text-fields";
 import { Box, Button, Grid, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 export default function Page() {
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const [cakes, setCakes] = useState<CakeFlavour[] | null>(null);
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState({
       name: '',
@@ -27,6 +31,26 @@ export default function Page() {
 
     const steps = ['Order Details','Client Details', 'Confirm Details'];
   
+    useEffect(() => {
+        async function fetchCakes() {
+            setLoading(true); // Set loading to true when fetching data
+            setError(null); // Clear previous errors
+            try{
+                const response = await fetch(`/api/cakes?`)
+                const data = await response.json();
+                setCakes(data.data);
+                setLoading(false);
+                
+            
+            } catch (error) {
+                console.error('Failed to fetch cakes', error);
+                setLoading(false);
+            }
+    
+        }
+        fetchCakes();
+    },[])
+
     const handleNext = () => {
       setActiveStep((prevStep) => prevStep + 1);
     };
@@ -47,7 +71,11 @@ export default function Page() {
       switch (step) {
         case 0:
           return (
-            <OrderDetailsForm formData={formData} handleChange={handleChange} />
+            <OrderDetailsForm 
+            formData={formData} 
+            handleChange={handleChange}
+            cakeFlavours={cakes}
+            />
           );
         case 1:
           return (
@@ -69,7 +97,7 @@ export default function Page() {
           return null;
       }
     };
-  
+
     return (
       <Box sx={{ 
         width: '100%', 
