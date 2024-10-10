@@ -1,47 +1,103 @@
 "use client"
-import { SubmitButton } from "@/app/components/buttons/filled-button";
-import { DatePickerField, DisabledFormTextField, FormTextField, RequiredFormTextField } from "@/app/components/textfields/form-text-fields";
-import PasswordTextField from "@/app/components/textfields/password-text-field";
-import { Grid } from "@mui/material";
-export default function Page(){
+import ClientDetailsForm from "@/app/components/forms/client_details_form";
+import OrderDetailsForm from "@/app/components/forms/order_details_form";
+import CustomizedSteppers from "@/app/components/steppers/orders_stepper";
+import { DatePickerField, FormTextField, MultilineTextField, SelectTextField, TimePickerField } from "@/app/components/textfields/form-text-fields";
+import { Box, Button, Grid, TextField } from "@mui/material";
+import { useState } from "react";
+
+export default function Page() {
+    const [activeStep, setActiveStep] = useState(0);
+    const [formData, setFormData] = useState({
+      name: '',
+      flavour: '',
+      design: '',
+      size: 0,
+      date: '',
+      time: '',
+      contact: '',
+      attendant: '',
+      status:'',
+      total: 0,
+      deposit: 0,
+      balance: 0,
+      deliveryLocation: '',
+      additionalDescription: '',
+    });
+
+    const steps = ['Order Details','Client Details', 'Confirm Details'];
+  
+    const handleNext = () => {
+      setActiveStep((prevStep) => prevStep + 1);
+    };
+  
+    const handleBack = () => {
+      setActiveStep((prevStep) => prevStep - 1);
+    };
+  
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+  
+    const handleSubmit = () => {
+      console.log(formData); // Handle form submission here
+    };
+  
+    const renderStepContent = (step: number) => {
+      switch (step) {
+        case 0:
+          return (
+            <OrderDetailsForm formData={formData} handleChange={handleChange} />
+          );
+        case 1:
+          return (
+            <ClientDetailsForm formData={formData} handleChange={handleChange} />
+          );
+        case 2:
+          return (
+            <Box>
+              <h3>Confirm your details:</h3>
+              <p><strong>Name:</strong> {formData.name}</p>
+              <p><strong>Flavour:</strong> {formData.flavour}</p>
+              <p><strong>Size:</strong> {formData.size}</p>
+              <p><strong>Contact:</strong> {formData.contact}</p>
+              <p><strong>Delivery Location:</strong> {formData.deliveryLocation}</p>
+              {/* Add more confirmation details as needed */}
+            </Box>
+          );
+        default:
+          return null;
+      }
+    };
+  
     return (
-        <div>
-            <div>
-                <h1>Order Details</h1>
-            </div>
-            <div>
-                <form>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <DisabledFormTextField value="1234" label="Order-Id"/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <FormTextField label="Total" placeholder="24,999" value="" onChange={() => {}}/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <RequiredFormTextField label="Name" placeholder="John Doe"value="" onChange={() => {}} />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <FormTextField label="Contact" placeholder="+254712345678" value="" onChange={() => {}}/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <DatePickerField />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <DatePickerField />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <FormTextField label="Flavour" placeholder="Vanilla" value="" onChange={() => {}}/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <FormTextField label="Size" placeholder="2 kg" value="" onChange={() => {}}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <SubmitButton > Next </SubmitButton>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
-        </div>
-    )
-}
+      <Box sx={{ 
+        width: '100%', 
+        p: 5,
+        mt: 5,
+        background: "#242424"
+        }}>
+        {/* Stepper Component */}
+        <CustomizedSteppers activeStep={activeStep} />
+  
+        {/* Form Content */}
+        {renderStepContent(activeStep)}
+  
+        {/* Buttons */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, }}>
+          <Button disabled={activeStep === 0} onClick={handleBack}>
+            Back
+          </Button>
+          {activeStep === steps.length - 1 ? (
+            <Button variant="contained" onClick={handleSubmit}>
+              Submit
+            </Button>
+          ) : (
+            <Button variant="contained" onClick={handleNext}>
+              Next
+            </Button>
+          )}
+        </Box>
+      </Box>
+    );
+  }

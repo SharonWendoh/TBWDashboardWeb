@@ -4,19 +4,25 @@ import { Box } from "@mui/material";
 
 export default function Layout({ children }: {children: React.ReactNode}){
     return (
-        <Box sx={{ display: 'flex' }}>
-            <TopAppBar />
-            <MenuDrawer />
-            <Box 
-            component="main" 
-            sx={{ 
-                flexGrow: 1, 
-                p: 3 , 
-                mt: '32px',
-            }}>
-             {children}   
-            </Box>
-                
-        </Box>
+<Box
+      component="main"
+      sx={{
+        display: "flex",
+        flexDirection: "column", // Make sure content stacks below each other
+      }}
+    >
+      <TopAppBar />
+      <Box
+        sx={{
+          display: "flex",
+          flexGrow: 1,
+          padding: 3,
+          marginTop: "64px", // Account for the height of the AppBar
+        }}
+      >
+        <MenuDrawer />
+        {children}
+      </Box>
+    </Box>
     )
 }

@@ -42,7 +42,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
-  //...theme.mixins.toolbar,
+  ...theme.mixins.toolbar,
 }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -79,9 +79,11 @@ export default function MenuDrawer() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box //sx={{ flexGrow: 1 }} 
+    sx={{ display: 'flex' }}
+    >
       <CssBaseline />
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} anchor='left'>
         <DrawerHeader>
           <IconButton onClick={handleDrawerToggle}>
             {theme.direction === 'rtl' ? (
