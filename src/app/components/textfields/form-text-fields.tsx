@@ -5,6 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 interface TextFieldProps {
   label: string;
@@ -32,6 +33,12 @@ interface SelectTextFieldProps {
   value: string;
   data: CakeFlavour[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+interface DateAndTimeProps {
+  label: string;
+  value: '';
+  onChange: (newValue: any) => void 
 }
 const data = ["Vanilla", "Chocolate"];
 
@@ -110,12 +117,29 @@ export function RequiredFormTextField({
   )
 }
 
-export function DatePickerField(){
+export function DatePickerField({label, value, onChange} : DateAndTimeProps){
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box sx={{ width: '100%' }}>
         <DatePicker 
-          label="Select date" 
+          label={label}
+          value={value ? dayjs(value) : null}
+          onChange={onChange}
+          sx={{ width: '100%' }}
+          />
+      </Box>
+    </LocalizationProvider>
+  );
+}
+export function DisabledDatePickerField({label, value } : any){
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Box sx={{ width: '100%' }}>
+        <DatePicker 
+          disabled
+          defaultValue={dayjs()}
+          label={label}
+          value={value ? dayjs(value) : null}
           sx={{ width: '100%' }}
           />
       </Box>
@@ -123,12 +147,14 @@ export function DatePickerField(){
   );
 }
 
-export function TimePickerField(){
+export function TimePickerField({ label, value, onChange }: DateAndTimeProps){
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Box sx={{ width: '100%' }}>
           <TimePicker 
-            label="Select Time" 
+            label={label}
+            value={value ? dayjs(value) : null}
+            onChange={onChange}
             sx={{ width: '100%' }}  // Set full width via sx prop
           />
       </Box>
@@ -179,7 +205,7 @@ export function MultilineTextField({
         rows={4}
         variant="outlined" 
         //placeholder={placeholder}
-        //value={value}
+        value={value}
         onChange={onChange}
         />
     )

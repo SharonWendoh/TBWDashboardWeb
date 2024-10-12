@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, MenuItem, Select } from "@mui/material";
 import { FormTextField, MultilineTextField, NumberTextField, SelectTextField } from "../textfields/form-text-fields";
 
 interface OrderDetailsFormProps {
@@ -36,8 +36,8 @@ export default function OrderDetailsForm({ formData, handleChange, cakeFlavours 
                     <Grid container spacing={3} mb={4}>
                         <Grid item xs={12} md={6}>
                             <MultilineTextField 
-                                label="Design/Image"
-                                name=""
+                                label="Design"
+                                name="design"
                                 placeholder="Design"
                                 value={formData.design}
                                 onChange={handleChange}
@@ -45,8 +45,8 @@ export default function OrderDetailsForm({ formData, handleChange, cakeFlavours 
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <MultilineTextField 
-                                label="Additional description"
-                                name=""
+                                label="Additional_description"
+                                name="additionalDescription"
                                 placeholder="Description"
                                 value={formData.additionalDescription}
                                 onChange={handleChange}
@@ -66,13 +66,21 @@ export default function OrderDetailsForm({ formData, handleChange, cakeFlavours 
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <FormTextField 
-                                label="Status"
-                                name="status"
-                                placeholder="Booked"
-                                value={formData.status}
-                                onChange={handleChange}
-                            />
+                            <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Status"
+                            name="status"
+                            defaultValue={"Booked"}
+                            value={formData.status}
+                            onChange={handleChange}
+                            fullWidth
+                            >
+                                <MenuItem value={"Booked"}>Booked</MenuItem>
+                                <MenuItem value={"Confirmed"}>Confirmed</MenuItem>
+                                <MenuItem value={"In progress"}>In progress</MenuItem>
+                                <MenuItem value={"Completed"}>Completed</MenuItem>
+                            </Select>
                         </Grid>
                     </Grid>
                 </Box>

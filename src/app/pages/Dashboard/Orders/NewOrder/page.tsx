@@ -15,20 +15,20 @@ export default function Page() {
     const [formData, setFormData] = useState({
       name: '',
       flavour: '',
-      design: '',
       size: 0,
       date: '',
+      status:'',
       time: '',
+      total: 0,
       contact: '',
       attendant: '',
-      status:'',
-      total: 0,
       deposit: 0,
       balance: 0,
       deliveryLocation: '',
       additionalDescription: '',
+      design: '',
+      entryDate: ''
     });
-
     const steps = ['Order Details','Client Details', 'Confirm Details'];
   
     useEffect(() => {
@@ -50,7 +50,6 @@ export default function Page() {
         }
         fetchCakes();
     },[])
-
     const handleNext = () => {
       setActiveStep((prevStep) => prevStep + 1);
     };
@@ -61,6 +60,14 @@ export default function Page() {
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleDateChange = (field: string, newValue: any) => {
+        setFormData({ ...formData, [field]: newValue ? newValue.format("YYYY-MM-DD") : '' });
+    };
+    
+    const handleTimeChange = (field: string, newValue: any) => {
+    setFormData({ ...formData, [field]: newValue ? newValue.format("hh:mm A") : null });
     };
   
     const handleSubmit = () => {
@@ -79,16 +86,30 @@ export default function Page() {
           );
         case 1:
           return (
-            <ClientDetailsForm formData={formData} handleChange={handleChange} />
+            <ClientDetailsForm 
+            formData={formData} 
+            handleChange={handleChange} 
+            handleDateChange={handleDateChange}
+            handleTimeChange={handleTimeChange}
+            />
           );
         case 2:
           return (
             <Box>
               <h3>Confirm your details:</h3>
-              <p><strong>Name:</strong> {formData.name}</p>
               <p><strong>Flavour:</strong> {formData.flavour}</p>
               <p><strong>Size:</strong> {formData.size}</p>
+              <p><strong>Design:</strong> {formData.design}</p>
+              <p><strong>Additional Description:</strong> {formData.additionalDescription}</p>
+              <p><strong>Total:</strong> {formData.total}</p>
+              <p><strong>Deposit:</strong> {formData.deposit}</p>
+              <p><strong>Balance:</strong> {formData.balance}</p>
+              <p><strong>Name:</strong> {formData.name}</p>
               <p><strong>Contact:</strong> {formData.contact}</p>
+              <p><strong>Delivery Date:</strong> {formData.date}</p>
+              <p><strong>Delivery Time:</strong> {formData.time}</p>
+              <p><strong>Entry Date:</strong> {formData.entryDate}</p>
+              <p><strong>Attendant:</strong> {formData.attendant}</p>
               <p><strong>Delivery Location:</strong> {formData.deliveryLocation}</p>
               {/* Add more confirmation details as needed */}
             </Box>

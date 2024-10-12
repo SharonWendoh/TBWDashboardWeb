@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
-import { DatePickerField, FormTextField, MultilineTextField, TimePickerField } from "../textfields/form-text-fields";
+import { DatePickerField, DisabledDatePickerField, FormTextField, MultilineTextField, TimePickerField } from "../textfields/form-text-fields";
 
-export default function ClientDetailsForm({ formData, handleChange }: any){
+export default function ClientDetailsForm({ formData, handleChange, handleDateChange, handleTimeChange }: any){
     return(
         <Box>
             <Box sx={{ flexGrow: 1, mt: '32px'}}>
@@ -29,22 +29,29 @@ export default function ClientDetailsForm({ formData, handleChange }: any){
             <Box sx={{ flexGrow: 1, mt: '32px'}}>
                 <Grid container spacing={3} mb={4}>
                     <Grid item xs={12} md={6}>
-                        <DatePickerField />
+                        <DatePickerField 
+                        label="Select Delivery date"
+                        // name="deliveryDate"
+                        value={formData.date}
+                        onChange={(newValue) => handleDateChange("date", newValue)}
+                        />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <TimePickerField />
+                        <TimePickerField 
+                        label="Select Time"
+                        // name="deliveryTime"
+                        value={formData.time}
+                        onChange={(newValue) => handleTimeChange("time", newValue)}
+                        />
                     </Grid>
                 </Grid>
             </Box>
             <Box sx={{ flexGrow: 1, mt: '32px'}}>
                 <Grid container spacing={3} mb={4}>
                     <Grid item xs={12} md={6}>
-                        <FormTextField 
-                            label="Status"
-                            name="status"
-                            placeholder="Booked"
-                            value={formData.status}
-                            onChange={handleChange}
+                        <DisabledDatePickerField 
+                        label="Entry Date"
+                        value={formData.entryDate}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -62,8 +69,8 @@ export default function ClientDetailsForm({ formData, handleChange }: any){
                 <Grid container spacing={3} mb={4}>
                     <Grid item xs={12} md={12}>
                         <MultilineTextField 
-                            label="Delivery Location"
-                            name="Delivery Location"
+                            label="Delivery location"
+                            name="deliveryLocation"
                             placeholder="CBD"
                             value={formData.deliveryLocation}
                             onChange={handleChange}
