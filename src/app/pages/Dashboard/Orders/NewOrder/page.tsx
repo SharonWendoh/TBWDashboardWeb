@@ -3,13 +3,16 @@ import ClientDetailsForm from "@/app/components/forms/client_details_form";
 import OrderDetailsForm from "@/app/components/forms/order_details_form";
 import CustomizedSteppers from "@/app/components/steppers/orders_stepper";
 import { DatePickerField, FormTextField, MultilineTextField, SelectTextField, TimePickerField } from "@/app/components/textfields/form-text-fields";
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, Snackbar, SnackbarCloseReason, TextField } from "@mui/material";
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 
 export default function Page() {
+    const router = useRouter();
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [open, setOpen] = useState(false);
     const [cakes, setCakes] = useState<CakeFlavour[] | null>(null);
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState({
@@ -69,9 +72,52 @@ export default function Page() {
     const handleTimeChange = (field: string, newValue: any) => {
     setFormData({ ...formData, [field]: newValue ? newValue.format("hh:mm A") : null });
     };
+    const handleClose = (
+        event: React.SyntheticEvent | Event,
+        reason?: SnackbarCloseReason,
+      ) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+        router.push('/pages/Dashboard/Orders')
+      };
   
-    const handleSubmit = () => {
-      console.log(formData); // Handle form submission here
+    const handleSubmit = async () => {
+        try {
+            const response = await fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    flavour: formData.flavour,
+                    size: formData.size,
+                    date: formData.date,  // Ensure this is in the correct format
+                    status: 'Booked',
+                    time: formData.time,  // Ensure this is in the correct format
+                    total: formData.total,
+                    contact: formData.contact,
+                    attendant: formData.attendant,
+                    deposit: formData.deposit,
+                    delivery_location: formData.deliveryLocation,
+                    additional_description: formData.additionalDescription,
+                    image: null // Adjust if needed
+                })
+            })
+            if (!response.ok) {
+                throw new Error('Failed to save order');
+            }
+    
+            const result = await response.json();
+            console.log('Order saved successfully:', result);
+            setOpen(true);
+        } catch (error) {
+            console.error('Error saving order:', error);
+        }
+      //console.log(formData); // Handle form submission here
     };
   
     const renderStepContent = (step: number) => {
@@ -147,6 +193,12 @@ export default function Page() {
             </Button>
           )}
         </Box>
+        <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message="Order saved successfully"
+      />
       </Box>
     );
   }
